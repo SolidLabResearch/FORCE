@@ -1,5 +1,5 @@
 <pre class='metadata'>
-Title: Framework for ODRL Rule Compliance through Evaluation
+Title: Framework for ODRL Rule Compliance through Evaluation (FORCE)
 Shortname: FORCE
 Level: none
 Status: LD
@@ -7,12 +7,16 @@ Editor: Wout Slabbinck, Ghent University - imec http://idlab.ugent.be/, wout.sla
 Editor: Beatriz Esteves, Ghent University - imec http://idlab.ugent.be/, beatriz.esteves@ugent.be
 Abstract: The Framework for ODRL Rule Compliance through Evaluation (FORCE) is designed to assist in ODRL policy development and enhance comprehension of ODRL evaluation outputs. Furthermore, it enables experimentation and prototyping of ODRL 3.0 proposals.
 Markup Shorthands: markdown yes, css no
-URL: https://w3id.org/force/
+URL: https://w3id.org/force
 Canonical URL: _ORCHESTRATOR_CURRENT_BUILD_FULL_LINK_
 Previous Version: _ORCHESTRATOR_PREVIOUS_BUILD_FULL_LINK_
 Repository: https://github.com/SolidLabResearch/FORCE/
 !License: <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA-4.0</a>
 </pre>
+
+<p boilerplate="copyright">
+  <!-- This document is made available under the CC-BY-SA-4.0 License. -->
+</p>
 
 <pre class=biblio> 
 {
@@ -25,6 +29,13 @@ Repository: https://github.com/SolidLabResearch/FORCE/
             "Beatriz Esteves",
             "Simon Steyskal",
             "Benedict Whittam Smith"
+        ]
+    },
+    "odrl-profile-bp": {
+        "href": "https://w3c.github.io/odrl/profile-bp/",
+        "title": "ODRL V2.2 Profile Best Practices",
+        "authors": [
+            "Michael Steidl"
         ]
     },
     "SotW4ODRL": {
@@ -52,59 +63,202 @@ Repository: https://github.com/SolidLabResearch/FORCE/
             "Ruben Dedecker",
             "Beatriz Esteves"
         ]
+    },
+    "compliance-report": {
+        "href": "https://w3id.org/force/compliance-report",
+        "title": "ODRL Compliance Report Model",
+        "authors": [
+            "Wout Slabbinck",
+            "Beatriz Esteves"
+        ]
     }
 }
 </pre>
 
+**TODO: mention all publications that contributed to this work so far.**
+
 Introd­uction {#introduction}
-=====================
-<mark>TODO:</mark> write full text
-The Open Digital Rights Language (ODRL) is a W3C Recommendation 
-- [[!ODRL-model]]: interoperable information model
-- [[!odrl-vocab]]: The vocabulary used in that model
+============================
 
-The current problem: the recommendation defines how to represent policies using the vocabulary using the model, the interpretation and evaluation of these policies and its accompanying rules are not standardized.
+The **Open Digital Rights Language (ODRL)** is a W3C Recommendation that provides a standardized, machine-readable way to 
+express permissions, prohibitions, and obligations over content and services.
+In addition, these permissive, prohibitive and obligatory rules can be limited by constraints, such as temporal or spatial restrictions,
+and duties, such as making a payment or a deleting an asset after using it, may be imposed on permissions.
+This standard is composed of two W3C Recommendation: an information model [[!ODRL-model]] and a vocabulary [[!odrl-vocab]].
 
-To this extend: Formal Semantics spec [[!odrl-formal-semantics]]
+The ODRL Information Model specifies a semantic model for permission, prohibition, and obligation statements.
+This information model covers core concepts, such as assets, i.e., the resource or service over which the rule applies,
+parties, i.e., the senders or recipients of rules,
+and actions, i.e., the actual operations that are being permitted, denied or made mandatory. 
+As such, ODRL supports the expression of statements like "Party X **may** use Asset Y **under condition Z** and **must** do action W".
 
-Inspired by the ODRL Formal Semantics CG, Slabbinck et al. made in [Interoperable Interpretation and Evaluation of ODRL Policies](https://raw.githubusercontent.com/woutslabbinck/papers/main/2025/Interoperable-Interpretation-and-Evaluation-of-ODRL-Policies.pdf):
+Furthermore, the ODRL Vocabulary provides a well-defined RDF vocabulary that describes the terms used in ODRL policies.
+For instance, `odrl:use` and `odrl:distribute` are defined as ODRL actions,
+and `odrl:spatial` and `odrl:purpose` as ODRL left operands, used to model constraints.
+There is also the possibility to extend this vocabulary through the usage of profiles [[!odrl-profile-bp]],
+which allow the definition of additional terms, e.g., custom actions or left operands,
+for particular domains, e.g., healthcare or education.
 
-* [=ODRL Compliance Report=]
-* [ODRL Test Suite](https://w3id.org/force/test-suite): 
-* [=ODRL Evaluator=]
+As an example, the following ODRL policy specifies a *patient's permission for its health data to be read by a physician for primary care*:
+```turtle
+<https://example.com/health-primarycare> a odrl:Set ;
+    odrl:uid <https://example.com/health-primarycare> ;
+    dcterms:description "Patient allows its health data to be read by a physician for primary care."@en ;
+    odrl:permission [
+        odrl:action odrl:read ;
+        odrl:target <https://example.com/patient/health-data> ;
+        odrl:assigner <https://example.com/patient> ;
+        odrl:assignee <https://example.com/physician> ;
+        odrl:constraint [
+            odrl:leftOperand odrl:purpose ;
+            odrl:operator odrl:eq ;
+            odrl:rightOperand sector-health:PrimaryCareManagement ] ] .
+```
 
-FORCE is build on top of an [=ODRL Evaluator=] to allow experimenting with ODRL policies and the evaluation process.
-This is made possible through a user friendly User Interface
-Furthermore, it is used as an experimentation platform to prototype and showcase future ODRL proposals that could be included for ODRL 3.0.
+Furthermore, as previously discussed, the ODRL recommendations define how to represent policies using the information model and the vocabulary,
+however the expected behavior of software that performs computations based on these policies is not standardized.
+Hence, this might lead to differences in the interpretation and evaluation of these policies and its accompanying rules.
+To tackle this issue, the [ODRL CG](https://www.w3.org/community/odrl/)
+is currently developing a formal semantics for ODRL 2.2 [[!odrl-formal-semantics]].
+This specification defines the expected behavior of an piece of software, i.e., an ODRL Evaluator,
+that takes an input an ODRL policy, an evaluation request and a description of the state of the world,
+and outputs a compliance report which contains, e.g., information regarding active or inactive permissions
+or about the deontic state of prohibitions and obligations.
+
+Inspired by the work of the ODRL CG on this Formal Semantics specification,
+Slabbinck *et al.* described in
+[*'Interoperable Interpretation and Evaluation of ODRL Policies'*](https://raw.githubusercontent.com/woutslabbinck/papers/main/2025/Interoperable-Interpretation-and-Evaluation-of-ODRL-Policies.pdf)
+the development of the following contributions:
+
+* an [=ODRL Compliance Report=] model,
+* an [=ODRL Test Suite=], and
+* and [=ODRL Evaluator=].
+
+Based on this work, FORCE provides
+* a guide on the several specifications, e.g., the [=ODRL Compliance Report=] model or the [ODRL 3.0 proposal](#odrl3.0), and pieces of software, e.g., the [=ODRL Test Suite=] or the [=ODRL Evaluator=], we are building to work with the current ODRL standard and to test new features for a possible future version of the standard, and
+* a Web application that acts as a playground to test these specifications and software libraries.
 
 ## Terminology ## {#terminology}
 
 The following terms are used to describe concepts in this specification. 
 
 <dl>
-  <dt><dfn>ODRL Compliance Report</dfn></dt>
+  <dt><dfn>ODRL Compliance Report Model</dfn></dt>
   <dd>A vocabulary that is used to elaborate the result of an evaluation of an ODRL Policy, (optionally) ODRL Request and the State of the World. It elaborates not only whether a rule from a policy is active, but also why.</dd>
 
   <dt><dfn>ODRL Evaluator</dfn></dt>
   <dd>A system that determines whether the Rules of an ODRL Policy expression have meet their intended action performance.</dd>
 
-  <dt><dfn>State of the World</dfn></dt>
-  <dd>A set of knowledge representing real-world information aiding the evaluation of ODRL Policies. See the [State of the World for ODRL Evaluator](https://w3id.org/force/sotw) specification for further details. </dd>
-</dl>
-<mark>TODO:</mark> add state of the world and refer to state of the world specification
+  <dt><dfn>ODRL Test Suite</dfn></dt>
+  <dd>Software that can execute, validate and measure the compliance of an ODRL evaluator over a set of test cases.</dd>
 
+  <dt><dfn>State of the World</dfn></dt>
+  <dd>Knowledge representing real-world information aiding the evaluation of ODRL Policies.</dd>
+</dl>
 
 ODRL Compliance Report Model {#compliance-report}
-=====================
+=================================================
+
+The ODRL Compliance Report Model [[!compliance-report]] defines a model and a vocabulary
+that can be used to compute the output of an evaluation of a ODRL Policy, a ODRL Request, and the state of the world.
+It elaborates not only whether a rule from a policy is active, but also why,
+by taking into consideration the ODRL Formal Semantics specification [[!odrl-formal-semantics]].
+
+To compute the compliance report, the following parameters are considered:
+* **Satisfaction state**: whether a certain premise is satisfied or not, e.g., the requested asset matches the target of the policy rule.
+* **Activation state**: a rule is active if, and only if, all premises of a rule are satisfied.
+* **Attempted state**: if the assignee made a request to perform a certain action over a certain target asset, then the rule was attempted.
+* **Performance state**: whether the action of the rule was performed, unperformed, or it has an unknown state, i.e., there is no information to know if it was already performed or not, but it still can be.
+* **Deontic state**: whether a given action that is allowed is already executed, should have been executed and it was not, or there is not enough information to make the decision.
+
+Below is an overview of the ODRL Compliance Report Model.
 
 <figure id="compliance-report-model-figure">
 <img src="./img/Compliance Report Model.svg">
 <figcaption>Compliance Report model</figcaption>
 </figure>
-<mark>TODO:</mark> refer to custom spec
+
+As an example, if there is a policy that states that ALICE may READ resource X before 2024-02-12T11:20:10.999Z:
+```turtle
+<urn:uuid:32127a3f-5296-4cc6-b9d6-ef6c647a721d> a odrl:Set ;
+  odrl:uid <urn:uuid:32127a3f-5296-4cc6-b9d6-ef6c647a721d> ;
+  dcterms:description "ALICE may READ resource X before 2024-02-12T11:20:10.999Z." ;
+  dcterms:source <https://github.com/SolidLabResearch/ODRL-Test-Suite/> ;
+  odrl:permission <urn:uuid:d6ab4a38-68fb-418e-8af5-e77649a2187a> .
+
+<urn:uuid:d6ab4a38-68fb-418e-8af5-e77649a2187a> a odrl:Permission ;
+  odrl:assignee ex:alice ;
+  odrl:action odrl:read ;
+  odrl:target ex:x ;
+  odrl:constraint <urn:uuid:constraint:86526f9b-57c2-4c94-b079-9762fec562f1> .
+
+<urn:uuid:constraint:86526f9b-57c2-4c94-b079-9762fec562f1> odrl:leftOperand odrl:dateTime ;
+  odrl:operator odrl:lt ;
+  odrl:rightOperand "2024-02-12T11:20:10.999Z"^^xsd:dateTime .
+```
+
+and ALICE requests to READ resource X:
+```turtle
+<urn:uuid:1bafee59-006c-46a3-810c-5d176b4be364> a odrl:Request ;
+  odrl:uid <urn:uuid:1bafee59-006c-46a3-810c-5d176b4be364> ;
+  dcterms:description "Requesting Party ALICE requests to READ resource X." ;
+  odrl:permission <urn:uuid:186be541-5857-4ce3-9f03-1a274f16bf59> .
+
+<urn:uuid:186be541-5857-4ce3-9f03-1a274f16bf59> a odrl:Permission ;
+  odrl:assignee ex:alice ;
+  odrl:action odrl:read ;
+  odrl:target ex:x .
+```
+
+at the current time that is recorded in the state of the world as:
+```turtle
+@prefix temp: <http://example.com/request/> .
+
+<urn:uuid:192620fa-06d9-447b-adbd-bd1ece4f9b12> a ex:Sotw ;
+  ex:includes temp:currentTime .
+
+temp:currentTime dcterms:issued "2017-02-12T11:20:10.999Z"^^xsd:dateTime .
+```
+
+then ALICE is ALLOWED to READ resource X
+because the target resource, action, party, and temporal constraint (current time is before 2024-02-12T11:20:10.999Z)
+premises are satisfied and as such the permission in the policy is active:
+```turtle
+<urn:uuid:352c5b8a-3249-4a6a-add7-bc3ab1cc41e3> a report:PolicyReport ;
+  dcterms:created "2017-02-12T11:20:10.999Z"^^xsd:dateTime ;
+  report:policy <urn:uuid:32127a3f-5296-4cc6-b9d6-ef6c647a721d> ;
+  report:policyRequest <urn:uuid:1bafee59-006c-46a3-810c-5d176b4be364> ;
+  report:ruleReport <urn:uuid:485a907c-c90b-4b8e-8df6-161829751c99> .
+
+<urn:uuid:485a907c-c90b-4b8e-8df6-161829751c99> a report:PermissionReport ;
+  report:attemptState report:Attempted ;
+  report:rule <urn:uuid:d6ab4a38-68fb-418e-8af5-e77649a2187a> ;
+  report:ruleRequest <urn:uuid:186be541-5857-4ce3-9f03-1a274f16bf59> ;
+  report:premiseReport <urn:uuid:42391701-9c0b-43de-92f7-5e8d9ee8b425>,
+    <urn:uuid:17d7a919-77a8-447a-9a9f-714795af9663>,
+    <urn:uuid:980cd0b6-7839-4428-937d-f110c3bed77c>,
+    <urn:uuid:5662701d-37da-41e4-9b7c-cf464d88a6dc> ;
+  report:activationState report:Active .
+
+<urn:uuid:17d7a919-77a8-447a-9a9f-714795af9663> a report:TargetReport ;
+  report:satisfactionState report:Satisfied .
+
+<urn:uuid:980cd0b6-7839-4428-937d-f110c3bed77c> a report:PartyReport ;
+  report:satisfactionState report:Satisfied .
+
+<urn:uuid:5662701d-37da-41e4-9b7c-cf464d88a6dc> a report:ActionReport ;
+  report:satisfactionState report:Satisfied .
+
+<urn:uuid:42391701-9c0b-43de-92f7-5e8d9ee8b425> a report:ConstraintReport ;
+  report:constraint <urn:uuid:constraint:86526f9b-57c2-4c94-b079-9762fec562f1> ;
+  report:constraintLeftOperand "2017-02-12T11:20:10.999Z"^^xsd:dateTime ;
+  report:constraintOperator odrl:lt ;
+  report:constraintRightOperand "2024-02-12T11:20:10.999Z"^^xsd:dateTime ;
+  report:satisfactionState report:Satisfied .
+```
 
 ODRL Test Suite {#test-suite}
-=====================
+=============================
 
 <figure id="test-suite-figure">
 <img src="./img/test-suite-cropped.jpg"> 
@@ -115,7 +269,7 @@ ODRL Test Suite {#test-suite}
 - <mark>TODO:</mark> what makes a test pass or fail in plain terms.
 
 ODRL Evaluator {#evaluator}
-=====================
+===========================
 
 <figure id="odrl-evaluator-figure">
 <img src="./img/ODRL-Evaluator.svg">
@@ -128,18 +282,22 @@ Mention different steps
 Elaborate the need for the time thingy
 Refer to repo how much we support
 
-User Inteface {#UI}
+User Interface {#UI}
 =====================
-[https://w3id.org/force/ESWC2025-demo](https://w3id.org/force/ESWC2025-demo)
-<mark>TODO: rename to NXDG2025 demo</mark>
+[https://w3id.org/force/demo](https://w3id.org/force/demo)
+
+State of the World for ODRL Evaluator {#sotw}
+=============================================
+
+See the State of the World for ODRL Evaluator specification [[!SotW4ODRL]] for further details. 
 
 ODRL 3.0 {#odrl3.0}
-=====================
+===================
 
 [[!ODRL3.0PROPOSAL]]
 
 Supporting Materials {#supporting-materials}
-=====================
+============================================
 
 - [=ODRL Compliance Report=]: [https://w3id.org/force/compliance-report](https://w3id.org/force/compliance-report)
     - repo: [https://w3id.org/force/compliance-report/repo](https://w3id.org/force/compliance-report/repo)
@@ -154,15 +312,17 @@ Supporting Materials {#supporting-materials}
     - source code: [https://w3id.org/force/ESWC2025-demo/repo](https://w3id.org/force/ESWC2025-demo/repo)
 
 Namespaces {#namespaces}
-=====================
+========================
 
 Commonly used namespace prefixes used in this specification:
 ```turtle
 @prefix dcterms:       <http://purl.org/dc/terms/> .
+@prefix ex:            <http://example.org/> .
 @prefix odrl:          <http://www.w3.org/ns/odrl/2/> .
 @prefix odrl3proposal: <https://w3id.org/force/odrl3proposal#> .
 @prefix report:        <https://w3id.org/force/compliance-report#> .
 @prefix rdf:           <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sector-health: <https://w3id.org/dpv/sector/health#> .
 @prefix skos:          <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd:           <http://www.w3.org/2001/XMLSchema#> .
 ```
