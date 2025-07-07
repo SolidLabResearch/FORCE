@@ -75,7 +75,7 @@ Repository: https://github.com/SolidLabResearch/FORCE/
 }
 </pre>
 
-**TODO: mention all publications that contributed to this work so far.**
+Note: **Key publications that contributed to this work:** Slabbinck *et al.*, 2025, [*'Interoperable Interpretation and Evaluation of ODRL Policies'*](https://raw.githubusercontent.com/woutslabbinck/papers/main/2025/Interoperable-Interpretation-and-Evaluation-of-ODRL-Policies.pdf).
 
 Introd­uction {#introduction}
 ============================
