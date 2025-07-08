@@ -2422,15 +2422,18 @@ Then compare the evaluated policy report against the test case policy report.</p
      <img src="./img/ODRL-Evaluator.svg"> 
     <figcaption>ODRL Evaluator architecture</figcaption>
    </figure>
-   <p>The <a data-link-type="dfn" href="#odrl-evaluator" id="ref-for-odrl-evaluator②">ODRL Evaluator</a> <a data-link-type="biblio" href="#biblio-odrl-evaluator" title="ODRL Evaluator">[odrl-evaluator]</a> <mark>TODO:</mark> write full text</p>
-   <p>Mention different steps</p>
-   <p>Elaborate the need for the time thingy
-Refer to repo how much we support</p>
+   <p><mark>TODO:</mark> rewrite a bit?
+The <a data-link-type="dfn" href="#odrl-evaluator" id="ref-for-odrl-evaluator②">ODRL Evaluator</a> <a data-link-type="biblio" href="#biblio-odrl-evaluator" title="ODRL Evaluator">[odrl-evaluator]</a> is an open-source software component that evaluates ODRL policies that result in Compliance Reports.</p>
+   <p>The main components in current architecture are the <strong>validation component</strong> and the <strong>evaluation component</strong>.
+The former performs several sanity checks, ensuring that only valid input is used to evaluate the policies in the evaluation component.</p>
+   <p>As the <a data-link-type="dfn" href="#odrl-evaluator" id="ref-for-odrl-evaluator③">ODRL Evaluator</a> is fully stateless and the policy report requires time to be present, the time MUST always be passed in the <a data-link-type="dfn" href="#state-of-the-world" id="ref-for-state-of-the-world">State of the World</a>.</p>
+   <p>This is achieved by presenting at least following triple there <code>temp:currentTime dcterms:issued "2017-02-12T11:20:10.999Z"^^xsd:dateTime .</code> and in more details elaborated in the <a href="#compliance-report">Compliance Report section</a>.</p>
    <h2 class="heading settled" data-level="5" id="UI"><span class="secno">5. </span><span class="content">User Interface</span><a class="self-link" href="#UI"></a></h2>
-    <a href="https://w3id.org/force/demo">https://w3id.org/force/demo</a> 
+    <mark>TODO:</mark> elabore quickly <a href="https://w3id.org/force/demo">https://w3id.org/force/demo</a> 
    <h2 class="heading settled" data-level="6" id="sotw"><span class="secno">6. </span><span class="content">State of the World for ODRL Evaluator</span><a class="self-link" href="#sotw"></a></h2>
    <p>See the State of the World for ODRL Evaluator specification <a data-link-type="biblio" href="#biblio-sotw4odrl" title="State of the World for ODRL Evaluator">[SotW4ODRL]</a> for further details.</p>
    <h2 class="heading settled" data-level="7" id="odrl3.0"><span class="secno">7. </span><span class="content">ODRL 3.0</span><a class="self-link" href="#odrl3.0"></a></h2>
+    <mark>TODO:</mark> elabore quickly 
    <p><a data-link-type="biblio" href="#biblio-odrl30proposal" title="Open Digital Rights Language (ODRL) 3.0 Proposal">[ODRL3.0PROPOSAL]</a></p>
    <h2 class="heading settled" data-level="8" id="supporting-materials"><span class="secno">8. </span><span class="content">Supporting Materials</span><a class="self-link" href="#supporting-materials"></a></h2>
    <ul>
@@ -2447,7 +2450,7 @@ Refer to repo how much we support</p>
        <p>github repository: <a href="https://w3id.org/force/test-suite/repo">https://w3id.org/force/test-suite/repo</a></p>
      </ul>
     <li data-md>
-     <p>github repository for an <a data-link-type="dfn" href="#odrl-evaluator" id="ref-for-odrl-evaluator③">ODRL Evaluator</a> (<a data-link-type="biblio" href="#biblio-odrl-evaluator" title="ODRL Evaluator">[odrl-evaluator]</a>): <a href="https://w3id.org/force/evaluator">https://w3id.org/force/evaluator</a></p>
+     <p>github repository for an <a data-link-type="dfn" href="#odrl-evaluator" id="ref-for-odrl-evaluator④">ODRL Evaluator</a> (<a data-link-type="biblio" href="#biblio-odrl-evaluator" title="ODRL Evaluator">[odrl-evaluator]</a>): <a href="https://w3id.org/force/evaluator">https://w3id.org/force/evaluator</a></p>
     <li data-md>
      <p>Key publications that contributed to this work:</p>
      <ul>
@@ -2455,7 +2458,7 @@ Refer to repo how much we support</p>
        <p>Slabbinck <em>et al.</em>, 2025, <a href="https://raw.githubusercontent.com/woutslabbinck/papers/main/2025/Interoperable-Interpretation-and-Evaluation-of-ODRL-Policies.pdf"><em>'Interoperable Interpretation and Evaluation of ODRL Policies'</em></a>.</p>
      </ul>
     <li data-md>
-     <p><a data-link-type="dfn" href="#state-of-the-world" id="ref-for-state-of-the-world">State of the World</a> for ODRL specification (<a data-link-type="biblio" href="#biblio-sotw4odrl" title="State of the World for ODRL Evaluator">[SotW4ODRL]</a>): <a href="https://w3id.org/sotw">https://w3id.org/sotw</a></p>
+     <p><a data-link-type="dfn" href="#state-of-the-world" id="ref-for-state-of-the-world①">State of the World</a> for ODRL specification (<a data-link-type="biblio" href="#biblio-sotw4odrl" title="State of the World for ODRL Evaluator">[SotW4ODRL]</a>): <a href="https://w3id.org/sotw">https://w3id.org/sotw</a></p>
     <li data-md>
      <p>ODRL Policy Instantiation specification (<a data-link-type="biblio" href="#biblio-odrl-instantiation" title="ODRL Policy Agreement Instantiation">[ODRL-Instantiation]</a>): <a href="https://w3id.org/policy-instantiation">https://w3id.org/policy-instantiation</a></p>
     <li data-md>
@@ -2861,9 +2864,9 @@ function parseHTML(markup) {
 {
 let dfnPanelData = {
 "odrl-compliance-report-model": {"dfnID":"odrl-compliance-report-model","dfnText":"ODRL Compliance Report Model","external":false,"refSections":[{"refs":[{"id":"ref-for-odrl-compliance-report-model"}],"title":"1. Introd\u00aduction"},{"refs":[{"id":"ref-for-odrl-compliance-report-model\u2460"}],"title":"2. ODRL Compliance Report Model"},{"refs":[{"id":"ref-for-odrl-compliance-report-model\u2461"}],"title":"8. Supporting Materials"}],"url":"#odrl-compliance-report-model"},
-"odrl-evaluator": {"dfnID":"odrl-evaluator","dfnText":"ODRL Evaluator","external":false,"refSections":[{"refs":[{"id":"ref-for-odrl-evaluator"},{"id":"ref-for-odrl-evaluator\u2460"}],"title":"1. Introd\u00aduction"},{"refs":[{"id":"ref-for-odrl-evaluator\u2461"}],"title":"4. ODRL Evaluator"},{"refs":[{"id":"ref-for-odrl-evaluator\u2462"}],"title":"8. Supporting Materials"}],"url":"#odrl-evaluator"},
+"odrl-evaluator": {"dfnID":"odrl-evaluator","dfnText":"ODRL Evaluator","external":false,"refSections":[{"refs":[{"id":"ref-for-odrl-evaluator"},{"id":"ref-for-odrl-evaluator\u2460"}],"title":"1. Introd\u00aduction"},{"refs":[{"id":"ref-for-odrl-evaluator\u2461"},{"id":"ref-for-odrl-evaluator\u2462"}],"title":"4. ODRL Evaluator"},{"refs":[{"id":"ref-for-odrl-evaluator\u2463"}],"title":"8. Supporting Materials"}],"url":"#odrl-evaluator"},
 "odrl-test-suite": {"dfnID":"odrl-test-suite","dfnText":"ODRL Test Suite","external":false,"refSections":[{"refs":[{"id":"ref-for-odrl-test-suite"},{"id":"ref-for-odrl-test-suite\u2460"}],"title":"1. Introd\u00aduction"},{"refs":[{"id":"ref-for-odrl-test-suite\u2461"},{"id":"ref-for-odrl-test-suite\u2462"}],"title":"3. ODRL Test Suite"},{"refs":[{"id":"ref-for-odrl-test-suite\u2463"}],"title":"3.1. Contributing"},{"refs":[{"id":"ref-for-odrl-test-suite\u2464"}],"title":"8. Supporting Materials"}],"url":"#odrl-test-suite"},
-"state-of-the-world": {"dfnID":"state-of-the-world","dfnText":"State of the World","external":false,"refSections":[{"refs":[{"id":"ref-for-state-of-the-world"}],"title":"8. Supporting Materials"}],"url":"#state-of-the-world"},
+"state-of-the-world": {"dfnID":"state-of-the-world","dfnText":"State of the World","external":false,"refSections":[{"refs":[{"id":"ref-for-state-of-the-world"}],"title":"4. ODRL Evaluator"},{"refs":[{"id":"ref-for-state-of-the-world\u2460"}],"title":"8. Supporting Materials"}],"url":"#state-of-the-world"},
 };
 
 document.addEventListener("DOMContentLoaded", ()=>{
