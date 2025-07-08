@@ -18,6 +18,9 @@ Repository: https://github.com/SolidLabResearch/FORCE/
   <!-- This document is made available under the CC-BY-SA-4.0 License. -->
 </p>
 
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+
 <pre class=biblio> 
 {
     "odrl-formal-semantics": {
