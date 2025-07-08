@@ -310,15 +310,16 @@ ODRL Evaluator {#evaluator}
 <figcaption>ODRL Evaluator architecture</figcaption>
 </figure>
 
-<mark>TODO:</mark> rewrite a bit?
 The [=ODRL Evaluator=] [[!odrl-evaluator]] is an open-source software component that evaluates ODRL policies that result in Compliance Reports.
 
-The main components in current architecture are the **validation component** and the **evaluation component**.
-The former performs several sanity checks, ensuring that only valid input is used to evaluate the policies in the evaluation component.
+The current architecture consists of two main components: the **validation component** and the **evaluation component**. 
+The validation component performs a series of sanity checks to ensure that only valid input is passed to the evaluation component for policy evaluation.
 
-As the [=ODRL Evaluator=] is fully stateless and the policy report requires time to be present, the time MUST always be passed in the [=State of the World=].
-
-This is achieved by presenting at least following triple there `temp:currentTime dcterms:issued "2017-02-12T11:20:10.999Z"^^xsd:dateTime .` and in more details elaborated in the [Compliance Report section](#compliance-report).
+The [=ODRL Evaluator=] is fully stateless.
+If state is required for policy evaluation, then it MUST be present in the [=State of the World=]
+One example of such a required fact is the current time, which MUST always be included.
+This is achieved by presenting at least following triple: `temp:currentTime dcterms:issued "2017-02-12T11:20:10.999Z"^^xsd:dateTime .` 
+Further details are elaborated in the [Compliance Report section](#compliance-report).
 
 User Interface {#UI}
 =====================
