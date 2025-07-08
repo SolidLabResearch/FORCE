@@ -74,6 +74,22 @@ Repository: https://github.com/SolidLabResearch/FORCE/
             "Wout Slabbinck",
             "Beatriz Esteves"
         ]
+    },
+    "odrl-test-suite": {
+        "href": "https://w3id.org/force/test-suite",
+        "title": "ODRL Test Suite",
+        "authors": [
+            "Wout Slabbinck",
+            "Beatriz Esteves"
+        ]
+    },
+    "odrl-evaluator": {
+        "href": "https://w3id.org/force/evaluator",
+        "title": "ODRL Evaluator",
+        "authors": [
+            "Wout Slabbinck",
+            "Beatriz Esteves"
+        ]
     }
 }
 </pre>
@@ -133,7 +149,7 @@ Slabbinck *et al.* described in
 [*'Interoperable Interpretation and Evaluation of ODRL Policies'*](https://raw.githubusercontent.com/woutslabbinck/papers/main/2025/Interoperable-Interpretation-and-Evaluation-of-ODRL-Policies.pdf)
 the development of the following contributions:
 
-* an [=ODRL Compliance Report=] model,
+* an [=ODRL Compliance Report Model=],
 * an [=ODRL Test Suite=], and
 * and [=ODRL Evaluator=].
 
@@ -162,7 +178,7 @@ The following terms are used to describe concepts in this specification.
 ODRL Compliance Report Model {#compliance-report}
 =================================================
 
-The ODRL Compliance Report Model [[!compliance-report]] defines a model and a vocabulary
+The [=ODRL Compliance Report Model=] [[!compliance-report]] defines a model and a vocabulary
 that can be used to compute the output of an evaluation of a ODRL Policy, a ODRL Request, and the state of the world.
 It elaborates not only whether a rule from a policy is active, but also why,
 by taking into consideration the ODRL Formal Semantics specification [[!odrl-formal-semantics]].
@@ -267,9 +283,24 @@ ODRL Test Suite {#test-suite}
 <img src="./img/test-suite-cropped.jpg"> 
 <figcaption>ODRL Test Suite</figcaption>
 </figure>
-<mark>TODO:</mark> write full text
 
-- <mark>TODO:</mark> what makes a test pass or fail in plain terms.
+The [=ODRL Test Suite=] [[!odrl-test-suite]] ensures that different ODRL Evaluators can compared against eachother regarding functionality.
+If they pass the test cases in the same manner, they can then be used interchangable.
+
+The flow of the [=ODRL Test Suite=] is the following:
+For each test case, evaluate the policy using the specificed state of the world and request.
+Then compare the evaluated policy report against the test case policy report.
+
+The comparison is executed using following metrics:
+- Both policy reports must have the same amount of rule reports,
+- Each rule report must point to the designated requested permission and policy rule.
+- The rule reports must have the same state (Activation, Attempted, Performance and Deontic)
+- All premises must have the same satisfaction state.
+
+
+## Contributing ## {#test-suite-contribution}
+
+Contributing to the test suite can be done by following the guide in the [wiki](https://github.com/SolidLabResearch/ODRL-Test-Suite/wiki/Contributing-to-Test-Cases). It describes how a test case has to be designed, what are the pitfalls and provides some tooling on how to create test-cases for the [=ODRL Test Suite=].
 
 ODRL Evaluator {#evaluator}
 ===========================
@@ -278,6 +309,8 @@ ODRL Evaluator {#evaluator}
 <img src="./img/ODRL-Evaluator.svg">
 <figcaption>ODRL Evaluator architecture</figcaption>
 </figure>
+
+The [=ODRL Evaluator=] [[!odrl-evaluator]]
 <mark>TODO:</mark> write full text
 
 Mention different steps
@@ -302,17 +335,18 @@ ODRL 3.0 {#odrl3.0}
 Supporting Materials {#supporting-materials}
 ============================================
 
-- [=ODRL Compliance Report=]: [https://w3id.org/force/compliance-report](https://w3id.org/force/compliance-report)
-    - repo: [https://w3id.org/force/compliance-report/repo](https://w3id.org/force/compliance-report/repo)
-- test suite: [https://w3id.org/force/test-suite](https://w3id.org/force/test-suite)
-    - repo: [https://w3id.org/force/test-suite/repo](https://w3id.org/force/test-suite/repo)
-- github repository for an [=ODRL Evaluator=]: [https://w3id.org/force/evaluator](https://w3id.org/force/evaluator)
-- ESWC 2025 paper: <mark>TODO:</mark>
+- [=ODRL Compliance Report Model=] ([[!compliance-report]]): [https://w3id.org/force/compliance-report](https://w3id.org/force/compliance-report)
+    - github repository: [https://w3id.org/force/compliance-report/repo](https://w3id.org/force/compliance-report/repo)
+- [=ODRL Test Suite=] ([[!odrl-test-suite]]): [https://w3id.org/force/test-suite](https://w3id.org/force/test-suite)
+    - github repository: [https://w3id.org/force/test-suite/repo](https://w3id.org/force/test-suite/repo)
+- github repository for an [=ODRL Evaluator=] ([[!odrl-evaluator]]): [https://w3id.org/force/evaluator](https://w3id.org/force/evaluator)
+- Key publications that contributed to this work: 
+    - Slabbinck *et al.*, 2025, [*'Interoperable Interpretation and Evaluation of ODRL Policies'*](https://raw.githubusercontent.com/woutslabbinck/papers/main/2025/Interoperable-Interpretation-and-Evaluation-of-ODRL-Policies.pdf).
 - [=State of the World=] for ODRL specification ([[!SotW4ODRL]]): [https://w3id.org/sotw](https://w3id.org/sotw)
 - ODRL Policy Instantiation specification ([[!ODRL-Instantiation]]): [https://w3id.org/policy-instantiation](https://w3id.org/policy-instantiation)
-- ODRL 3.0 Proposal specification: [https://w3id.org/odrl3proposal](https://w3id.org/odrl3proposal)
-- demonstrator: [https://w3id.org/force/ESWC2025-demo](https://w3id.org/force/ESWC2025-demo)
-    - source code: [https://w3id.org/force/ESWC2025-demo/repo](https://w3id.org/force/ESWC2025-demo/repo)
+- ODRL 3.0 Proposal specification ([[!ODRL3.0PROPOSAL]]): [https://w3id.org/odrl3proposal](https://w3id.org/odrl3proposal)
+- Web demonstrator: [https://w3id.org/force/demo](https://w3id.org/force/demo)
+    - source code: [https://w3id.org/force/demo/repo](https://w3id.org/force/demo/repo)
 
 Namespaces {#namespaces}
 ========================

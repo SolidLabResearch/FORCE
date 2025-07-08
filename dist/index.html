@@ -2206,7 +2206,11 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
       <li><a href="#terminology"><span class="secno">1.1</span> <span class="content">Terminology</span></a>
      </ol>
     <li><a href="#compliance-report"><span class="secno">2</span> <span class="content">ODRL Compliance Report Model</span></a>
-    <li><a href="#test-suite"><span class="secno">3</span> <span class="content">ODRL Test Suite</span></a>
+    <li>
+     <a href="#test-suite"><span class="secno">3</span> <span class="content">ODRL Test Suite</span></a>
+     <ol class="toc">
+      <li><a href="#test-suite-contribution"><span class="secno">3.1</span> <span class="content">Contributing</span></a>
+     </ol>
     <li><a href="#evaluator"><span class="secno">4</span> <span class="content">ODRL Evaluator</span></a>
     <li><a href="#UI"><span class="secno">5</span> <span class="content">User Interface</span></a>
     <li><a href="#sotw"><span class="secno">6</span> <span class="content">State of the World for ODRL Evaluator</span></a>
@@ -2271,7 +2275,7 @@ or about the deontic state of prohibitions and obligations.</p>
 Slabbinck <em>et al.</em> described in <a href="https://raw.githubusercontent.com/woutslabbinck/papers/main/2025/Interoperable-Interpretation-and-Evaluation-of-ODRL-Policies.pdf"><em>'Interoperable Interpretation and Evaluation of ODRL Policies'</em></a> the development of the following contributions:</p>
    <ul>
     <li data-md>
-     <p>an <a data-link-type="dfn">ODRL Compliance Report</a> model,</p>
+     <p>an <a data-link-type="dfn" href="#odrl-compliance-report-model" id="ref-for-odrl-compliance-report-model">ODRL Compliance Report Model</a>,</p>
     <li data-md>
      <p>an <a data-link-type="dfn" href="#odrl-test-suite" id="ref-for-odrl-test-suite">ODRL Test Suite</a>, and</p>
     <li data-md>
@@ -2297,7 +2301,7 @@ Slabbinck <em>et al.</em> described in <a href="https://raw.githubusercontent.co
     <dd>Knowledge representing real-world information aiding the evaluation of ODRL Policies.
    </dl>
    <h2 class="heading settled" data-level="2" id="compliance-report"><span class="secno">2. </span><span class="content">ODRL Compliance Report Model</span><a class="self-link" href="#compliance-report"></a></h2>
-   <p>The ODRL Compliance Report Model <a data-link-type="biblio" href="#biblio-compliance-report" title="ODRL Compliance Report Model">[compliance-report]</a> defines a model and a vocabulary
+   <p>The <a data-link-type="dfn" href="#odrl-compliance-report-model" id="ref-for-odrl-compliance-report-model①">ODRL Compliance Report Model</a> <a data-link-type="biblio" href="#biblio-compliance-report" title="ODRL Compliance Report Model">[compliance-report]</a> defines a model and a vocabulary
 that can be used to compute the output of an evaluation of a ODRL Policy, a ODRL Request, and the state of the world.
 It elaborates not only whether a rule from a policy is active, but also why,
 by taking into consideration the ODRL Formal Semantics specification <a data-link-type="biblio" href="#biblio-odrl-formal-semantics" title="ODRL Formal Semantics">[odrl-formal-semantics]</a>.</p>
@@ -2395,17 +2399,30 @@ premises are satisfied and as such the permission in the policy is active:</p>
      <img height="293" src="./img/test-suite-cropped.jpg" width="640"> 
     <figcaption>ODRL Test Suite</figcaption>
    </figure>
-    <mark>TODO:</mark> write full text 
+   <p>The <a data-link-type="dfn" href="#odrl-test-suite" id="ref-for-odrl-test-suite②">ODRL Test Suite</a> <a data-link-type="biblio" href="#biblio-odrl-test-suite" title="ODRL Test Suite">[odrl-test-suite]</a> ensures that different ODRL Evaluators can compared against eachother regarding functionality.
+If they pass the test cases in the same manner, they can then be used interchangable.</p>
+   <p>The flow of the <a data-link-type="dfn" href="#odrl-test-suite" id="ref-for-odrl-test-suite③">ODRL Test Suite</a> is the following:
+For each test case, evaluate the policy using the specificed state of the world and request.
+Then compare the evaluated policy report against the test case policy report.</p>
+   <p>The comparison is executed using following metrics:</p>
    <ul>
     <li data-md>
-     <p><mark>TODO:</mark> what makes a test pass or fail in plain terms.</p>
+     <p>Both policy reports must have the same amount of rule reports,</p>
+    <li data-md>
+     <p>Each rule report must point to the designated requested permission and policy rule.</p>
+    <li data-md>
+     <p>The rule reports must have the same state (Activation, Attempted, Performance and Deontic)</p>
+    <li data-md>
+     <p>All premises must have the same satisfaction state.</p>
    </ul>
+   <h3 class="heading settled" data-level="3.1" id="test-suite-contribution"><span class="secno">3.1. </span><span class="content">Contributing</span><a class="self-link" href="#test-suite-contribution"></a></h3>
+   <p>Contributing to the test suite can be done by following the guide in the <a href="https://github.com/SolidLabResearch/ODRL-Test-Suite/wiki/Contributing-to-Test-Cases">wiki</a>. It describes how a test case has to be designed, what are the pitfalls and provides some tooling on how to create test-cases for the <a data-link-type="dfn" href="#odrl-test-suite" id="ref-for-odrl-test-suite④">ODRL Test Suite</a>.</p>
    <h2 class="heading settled" data-level="4" id="evaluator"><span class="secno">4. </span><span class="content">ODRL Evaluator</span><a class="self-link" href="#evaluator"></a></h2>
    <figure id="odrl-evaluator-figure">
      <img src="./img/ODRL-Evaluator.svg"> 
     <figcaption>ODRL Evaluator architecture</figcaption>
    </figure>
-    <mark>TODO:</mark> write full text 
+   <p>The <a data-link-type="dfn" href="#odrl-evaluator" id="ref-for-odrl-evaluator②">ODRL Evaluator</a> <a data-link-type="biblio" href="#biblio-odrl-evaluator" title="ODRL Evaluator">[odrl-evaluator]</a> <mark>TODO:</mark> write full text</p>
    <p>Mention different steps</p>
    <p>Elaborate the need for the time thingy
 Refer to repo how much we support</p>
@@ -2418,32 +2435,36 @@ Refer to repo how much we support</p>
    <h2 class="heading settled" data-level="8" id="supporting-materials"><span class="secno">8. </span><span class="content">Supporting Materials</span><a class="self-link" href="#supporting-materials"></a></h2>
    <ul>
     <li data-md>
-     <p><a data-link-type="dfn">ODRL Compliance Report</a>: <a href="https://w3id.org/force/compliance-report">https://w3id.org/force/compliance-report</a></p>
+     <p><a data-link-type="dfn" href="#odrl-compliance-report-model" id="ref-for-odrl-compliance-report-model②">ODRL Compliance Report Model</a> (<a data-link-type="biblio" href="#biblio-compliance-report" title="ODRL Compliance Report Model">[compliance-report]</a>): <a href="https://w3id.org/force/compliance-report">https://w3id.org/force/compliance-report</a></p>
      <ul>
       <li data-md>
-       <p>repo: <a href="https://w3id.org/force/compliance-report/repo">https://w3id.org/force/compliance-report/repo</a></p>
+       <p>github repository: <a href="https://w3id.org/force/compliance-report/repo">https://w3id.org/force/compliance-report/repo</a></p>
      </ul>
     <li data-md>
-     <p>test suite: <a href="https://w3id.org/force/test-suite">https://w3id.org/force/test-suite</a></p>
+     <p><a data-link-type="dfn" href="#odrl-test-suite" id="ref-for-odrl-test-suite⑤">ODRL Test Suite</a> (<a data-link-type="biblio" href="#biblio-odrl-test-suite" title="ODRL Test Suite">[odrl-test-suite]</a>): <a href="https://w3id.org/force/test-suite">https://w3id.org/force/test-suite</a></p>
      <ul>
       <li data-md>
-       <p>repo: <a href="https://w3id.org/force/test-suite/repo">https://w3id.org/force/test-suite/repo</a></p>
+       <p>github repository: <a href="https://w3id.org/force/test-suite/repo">https://w3id.org/force/test-suite/repo</a></p>
      </ul>
     <li data-md>
-     <p>github repository for an <a data-link-type="dfn" href="#odrl-evaluator" id="ref-for-odrl-evaluator②">ODRL Evaluator</a>: <a href="https://w3id.org/force/evaluator">https://w3id.org/force/evaluator</a></p>
+     <p>github repository for an <a data-link-type="dfn" href="#odrl-evaluator" id="ref-for-odrl-evaluator③">ODRL Evaluator</a> (<a data-link-type="biblio" href="#biblio-odrl-evaluator" title="ODRL Evaluator">[odrl-evaluator]</a>): <a href="https://w3id.org/force/evaluator">https://w3id.org/force/evaluator</a></p>
     <li data-md>
-     <p>ESWC 2025 paper: <mark>TODO:</mark></p>
+     <p>Key publications that contributed to this work:</p>
+     <ul>
+      <li data-md>
+       <p>Slabbinck <em>et al.</em>, 2025, <a href="https://raw.githubusercontent.com/woutslabbinck/papers/main/2025/Interoperable-Interpretation-and-Evaluation-of-ODRL-Policies.pdf"><em>'Interoperable Interpretation and Evaluation of ODRL Policies'</em></a>.</p>
+     </ul>
     <li data-md>
      <p><a data-link-type="dfn" href="#state-of-the-world" id="ref-for-state-of-the-world">State of the World</a> for ODRL specification (<a data-link-type="biblio" href="#biblio-sotw4odrl" title="State of the World for ODRL Evaluator">[SotW4ODRL]</a>): <a href="https://w3id.org/sotw">https://w3id.org/sotw</a></p>
     <li data-md>
      <p>ODRL Policy Instantiation specification (<a data-link-type="biblio" href="#biblio-odrl-instantiation" title="ODRL Policy Agreement Instantiation">[ODRL-Instantiation]</a>): <a href="https://w3id.org/policy-instantiation">https://w3id.org/policy-instantiation</a></p>
     <li data-md>
-     <p>ODRL 3.0 Proposal specification: <a href="https://w3id.org/odrl3proposal">https://w3id.org/odrl3proposal</a></p>
+     <p>ODRL 3.0 Proposal specification (<a data-link-type="biblio" href="#biblio-odrl30proposal" title="Open Digital Rights Language (ODRL) 3.0 Proposal">[ODRL3.0PROPOSAL]</a>): <a href="https://w3id.org/odrl3proposal">https://w3id.org/odrl3proposal</a></p>
     <li data-md>
-     <p>demonstrator: <a href="https://w3id.org/force/ESWC2025-demo">https://w3id.org/force/ESWC2025-demo</a></p>
+     <p>Web demonstrator: <a href="https://w3id.org/force/demo">https://w3id.org/force/demo</a></p>
      <ul>
       <li data-md>
-       <p>source code: <a href="https://w3id.org/force/ESWC2025-demo/repo">https://w3id.org/force/ESWC2025-demo/repo</a></p>
+       <p>source code: <a href="https://w3id.org/force/demo/repo">https://w3id.org/force/demo/repo</a></p>
      </ul>
    </ul>
    <h2 class="heading settled" data-level="9" id="namespaces"><span class="secno">9. </span><span class="content">Namespaces</span><a class="self-link" href="#namespaces"></a></h2>
@@ -2618,6 +2639,8 @@ Refer to repo how much we support</p>
   <dl>
    <dt id="biblio-compliance-report">[COMPLIANCE-REPORT]
    <dd>Wout Slabbinck; Beatriz Esteves. <a href="https://w3id.org/force/compliance-report"><cite>ODRL Compliance Report Model</cite></a>. URL: <a href="https://w3id.org/force/compliance-report">https://w3id.org/force/compliance-report</a>
+   <dt id="biblio-odrl-evaluator">[ODRL-EVALUATOR]
+   <dd>Wout Slabbinck; Beatriz Esteves. <a href="https://w3id.org/force/evaluator"><cite>ODRL Evaluator</cite></a>. URL: <a href="https://w3id.org/force/evaluator">https://w3id.org/force/evaluator</a>
    <dt id="biblio-odrl-formal-semantics">[ODRL-FORMAL-SEMANTICS]
    <dd>Nicoletta Fornara; et al. <a href="https://w3c.github.io/odrl/formal-semantics/"><cite>ODRL Formal Semantics</cite></a>. URL: <a href="https://w3c.github.io/odrl/formal-semantics/">https://w3c.github.io/odrl/formal-semantics/</a>
    <dt id="biblio-odrl-instantiation">[ODRL-Instantiation]
@@ -2626,6 +2649,8 @@ Refer to repo how much we support</p>
    <dd>Renato Iannella; Serena Villata. <a href="https://w3c.github.io/poe/model/"><cite>ODRL Information Model 2.2</cite></a>. URL: <a href="https://w3c.github.io/poe/model/">https://w3c.github.io/poe/model/</a>
    <dt id="biblio-odrl-profile-bp">[ODRL-PROFILE-BP]
    <dd>Michael Steidl. <a href="https://w3c.github.io/odrl/profile-bp/"><cite>ODRL V2.2 Profile Best Practices</cite></a>. URL: <a href="https://w3c.github.io/odrl/profile-bp/">https://w3c.github.io/odrl/profile-bp/</a>
+   <dt id="biblio-odrl-test-suite">[ODRL-TEST-SUITE]
+   <dd>Wout Slabbinck; Beatriz Esteves. <a href="https://w3id.org/force/test-suite"><cite>ODRL Test Suite</cite></a>. URL: <a href="https://w3id.org/force/test-suite">https://w3id.org/force/test-suite</a>
    <dt id="biblio-odrl-vocab">[ODRL-VOCAB]
    <dd>Renato Iannella; et al. <a href="https://w3c.github.io/poe/vocab/"><cite>ODRL Vocabulary &amp; Expression 2.2</cite></a>. URL: <a href="https://w3c.github.io/poe/vocab/">https://w3c.github.io/poe/vocab/</a>
    <dt id="biblio-odrl30proposal">[ODRL3.0PROPOSAL]
@@ -2835,9 +2860,9 @@ function parseHTML(markup) {
 "use strict";
 {
 let dfnPanelData = {
-"odrl-compliance-report-model": {"dfnID":"odrl-compliance-report-model","dfnText":"ODRL Compliance Report Model","external":false,"refSections":[],"url":"#odrl-compliance-report-model"},
-"odrl-evaluator": {"dfnID":"odrl-evaluator","dfnText":"ODRL Evaluator","external":false,"refSections":[{"refs":[{"id":"ref-for-odrl-evaluator"},{"id":"ref-for-odrl-evaluator\u2460"}],"title":"1. Introd\u00aduction"},{"refs":[{"id":"ref-for-odrl-evaluator\u2461"}],"title":"8. Supporting Materials"}],"url":"#odrl-evaluator"},
-"odrl-test-suite": {"dfnID":"odrl-test-suite","dfnText":"ODRL Test Suite","external":false,"refSections":[{"refs":[{"id":"ref-for-odrl-test-suite"},{"id":"ref-for-odrl-test-suite\u2460"}],"title":"1. Introd\u00aduction"}],"url":"#odrl-test-suite"},
+"odrl-compliance-report-model": {"dfnID":"odrl-compliance-report-model","dfnText":"ODRL Compliance Report Model","external":false,"refSections":[{"refs":[{"id":"ref-for-odrl-compliance-report-model"}],"title":"1. Introd\u00aduction"},{"refs":[{"id":"ref-for-odrl-compliance-report-model\u2460"}],"title":"2. ODRL Compliance Report Model"},{"refs":[{"id":"ref-for-odrl-compliance-report-model\u2461"}],"title":"8. Supporting Materials"}],"url":"#odrl-compliance-report-model"},
+"odrl-evaluator": {"dfnID":"odrl-evaluator","dfnText":"ODRL Evaluator","external":false,"refSections":[{"refs":[{"id":"ref-for-odrl-evaluator"},{"id":"ref-for-odrl-evaluator\u2460"}],"title":"1. Introd\u00aduction"},{"refs":[{"id":"ref-for-odrl-evaluator\u2461"}],"title":"4. ODRL Evaluator"},{"refs":[{"id":"ref-for-odrl-evaluator\u2462"}],"title":"8. Supporting Materials"}],"url":"#odrl-evaluator"},
+"odrl-test-suite": {"dfnID":"odrl-test-suite","dfnText":"ODRL Test Suite","external":false,"refSections":[{"refs":[{"id":"ref-for-odrl-test-suite"},{"id":"ref-for-odrl-test-suite\u2460"}],"title":"1. Introd\u00aduction"},{"refs":[{"id":"ref-for-odrl-test-suite\u2461"},{"id":"ref-for-odrl-test-suite\u2462"}],"title":"3. ODRL Test Suite"},{"refs":[{"id":"ref-for-odrl-test-suite\u2463"}],"title":"3.1. Contributing"},{"refs":[{"id":"ref-for-odrl-test-suite\u2464"}],"title":"8. Supporting Materials"}],"url":"#odrl-test-suite"},
 "state-of-the-world": {"dfnID":"state-of-the-world","dfnText":"State of the World","external":false,"refSections":[{"refs":[{"id":"ref-for-state-of-the-world"}],"title":"8. Supporting Materials"}],"url":"#state-of-the-world"},
 };
 
@@ -3227,6 +3252,7 @@ function genLinkingSyntaxes(dfn) {
 "use strict";
 {
 let refsData = {
+"#odrl-compliance-report-model": {"displayText":"odrl compliance report model","export":true,"for_":[],"level":"","normative":true,"shortname":"force","spec":"force","status":"local","text":"odrl compliance report model","type":"dfn","url":"#odrl-compliance-report-model"},
 "#odrl-evaluator": {"displayText":"odrl evaluator","export":true,"for_":[],"level":"","normative":true,"shortname":"force","spec":"force","status":"local","text":"odrl evaluator","type":"dfn","url":"#odrl-evaluator"},
 "#odrl-test-suite": {"displayText":"odrl test suite","export":true,"for_":[],"level":"","normative":true,"shortname":"force","spec":"force","status":"local","text":"odrl test suite","type":"dfn","url":"#odrl-test-suite"},
 "#state-of-the-world": {"displayText":"state of the world","export":true,"for_":[],"level":"","normative":true,"shortname":"force","spec":"force","status":"local","text":"state of the world","type":"dfn","url":"#state-of-the-world"},
