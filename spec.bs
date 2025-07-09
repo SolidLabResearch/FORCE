@@ -154,7 +154,7 @@ the development of the following contributions:
 * and [=ODRL Evaluator=].
 
 Based on this work, FORCE provides
-* a guide on the several specifications, e.g., the [=ODRL Compliance Report=] model or the [ODRL 3.0 proposal](#odrl3.0), and pieces of software, e.g., the [=ODRL Test Suite=] or the [=ODRL Evaluator=], we are building to work with the current ODRL standard and to test new features for a possible future version of the standard, and
+* a guide on the several specifications, e.g., the [=ODRL Compliance Report Model=] or the [ODRL 3.0 proposal](#odrl3), and pieces of software, e.g., the [=ODRL Test Suite=] or the [=ODRL Evaluator=], we are building to work with the current ODRL standard and to test new features for a possible future version of the standard, and
 * a Web application that acts as a playground to test these specifications and software libraries.
 
 ## Terminology ## {#terminology}
@@ -323,19 +323,33 @@ Further details are elaborated in the [Compliance Report section](#compliance-re
 
 User Interface {#UI}
 =====================
-<mark>TODO:</mark> elabore quickly
-[https://w3id.org/force/demo](https://w3id.org/force/demo)
+The FORCE Web editor is a user interface developed with as goal aiding understanding of ODRL Policy Evaluation and experimenting with new features for ODRL (which is further elaborated in the [ODRL 3.0 section](#odrl3)).
+
+The core features of the demonstrator are the following:
+- An intuitive user interface such that users can edit ODRL Policies, requests and the [=State of the World=], which can then be immediately evaluated by an [=ODRL Evaluator=].
+- A comprehensive, human-readable explanation of the resulting output, aiding the understanding of the [=ODRL Compliance Report Model=].
+- A selection of scenarios (ODRL Policies, requests and SotWs) to facilitate exploring ODRL Policies and evaluations.
+
+There are two variants of the FORCE demonstrator:
+
+- FORCE demonstrator (default): [https://w3id.org/force/demo](https://w3id.org/force/demo)
+- FORCE demonstrator (with ODRL 3.0 proposals): [https://w3id.org/force/demo/odrl3proposal](https://w3id.org/force/demo/odrl3proposal)
 
 State of the World for ODRL Evaluator {#sotw}
 =============================================
 
 See the State of the World for ODRL Evaluator specification [[!SotW4ODRL]] for further details. 
 
-ODRL 3.0 {#odrl3.0}
+ODRL 3.0 {#odrl3}
 ===================
-<mark>TODO:</mark> elabore quickly
+Currently, there are use cases that ODRL 2.2 Information Model [[ODRL-model]] currently can not address.
+As such a specification has been made [[!ODRL3.0PROPOSAL]] to address such issues.
 
-[[!ODRL3.0PROPOSAL]]
+The ODRL 3.0 specification tries to address several limitations with the following structure:
+1. **Use Cases**: A collection of use cases which require a major change to the ODRL Model in order for them to be resolved
+2. **Requirements**: The common requirements extracted from the use cases that needs to be resolved such that the use cases can be implemented
+3. **ODRL 3.0 Proposals**: An example of how the requirements can be met through changes to the ODRL 2.2 Information Model [[ODRL-model]] and hints on how it could be implement.
+
 
 Supporting Materials {#supporting-materials}
 ============================================
