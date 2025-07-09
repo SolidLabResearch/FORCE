@@ -347,9 +347,9 @@ Supporting Materials {#supporting-materials}
 - github repository for an [=ODRL Evaluator=] ([[!odrl-evaluator]]): [https://w3id.org/force/evaluator](https://w3id.org/force/evaluator)
 - Key publications that contributed to this work: 
     - Slabbinck *et al.*, 2025, [*'Interoperable Interpretation and Evaluation of ODRL Policies'*](https://raw.githubusercontent.com/woutslabbinck/papers/main/2025/Interoperable-Interpretation-and-Evaluation-of-ODRL-Policies.pdf).
-- [=State of the World=] for ODRL specification ([[!SotW4ODRL]]): [https://w3id.org/sotw](https://w3id.org/sotw)
-- ODRL Policy Instantiation specification ([[!ODRL-Instantiation]]): [https://w3id.org/policy-instantiation](https://w3id.org/policy-instantiation)
-- ODRL 3.0 Proposal specification ([[!ODRL3.0PROPOSAL]]): [https://w3id.org/odrl3proposal](https://w3id.org/odrl3proposal)
+- [=State of the World=] for ODRL specification ([[!SotW4ODRL]]): [https://w3id.org/force/sotw](https://w3id.org/force/sotw)
+- ODRL Policy Instantiation specification ([[!ODRL-Instantiation]]): [https://w3id.org/force/policy-instantiation](https://w3id.org/force/policy-instantiation)
+- ODRL 3.0 Proposal specification ([[!ODRL3.0PROPOSAL]]): [https://w3id.org/force/odrl3proposal](https://w3id.org/force/odrl3proposal)
 - Web demonstrator: [https://w3id.org/force/demo](https://w3id.org/force/demo)
     - source code: [https://w3id.org/force/demo/repo](https://w3id.org/force/demo/repo)
 
